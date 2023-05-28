@@ -1,9 +1,8 @@
 from typing import Any, Callable, Dict, Optional
 
-from airflow.exceptions import AirflowException
 from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
-from airflow.models.connection import Connection
+from airflow.hooks.base_hook import BaseHook
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm import QlikSenseHookNTLM
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt import QlikSenseHookJWT
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert import QlikSenseHookCert
@@ -28,7 +27,7 @@ class QlikSenseReloadTaskOperator(BaseOperator):
     def __init__(self, *, taskId: str = None, conn_id: str = 'qlik_conn_sample', waitUntilFinished: bool = True, **kwargs: Any,) -> None:
         super().__init__(**kwargs)
         self.conn_id = conn_id
-        self.conn_type = Connection(conn_id=self.conn_id).conn_type
+        self.conn_type = BaseHook.get_connection(self.conn_id).conn_type
         self.taskId = taskId
         self.waitUntilFinished = waitUntilFinished
         
@@ -66,7 +65,4 @@ class QlikSenseReloadTaskOperator(BaseOperator):
 
         self.log.info('Status Code Return {}'.format(response.status_code))
         self.log.info('Answer Return {}'.format(response.text))
-
-
-
         return response.text

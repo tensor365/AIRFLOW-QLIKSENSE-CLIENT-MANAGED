@@ -19,7 +19,7 @@ class QlikSenseHookNTLM(QlikSenseHook):
     conn_type = 'qlik_sense_client_managed_ntlm'
     hook_name = '[NTLM] Qlik Sense Client Managed'
     auth_type = 'NTLM'
-    __cookie_session =''
+    __cookie_session =None
 
     def __init__(self,conn_id: str = default_conn_name) -> None:
         super().__init__()
@@ -33,33 +33,36 @@ class QlikSenseHookNTLM(QlikSenseHook):
         This function is calling qrs/about in method GET to obtain the cookies session.    
     
         """
+        
+        if self.__cookie_session is None:
 
-        session = self.get_conn_init()
-        endpoint = 'qrs/about'
-
-        if self.base_url and not self.base_url.endswith('/') and endpoint and not endpoint.startswith('/'):
-            url = self.base_url + '/' + endpoint
-        else:
-            url = (self.base_url or '') + (endpoint or '')
-
-        req = requests.Request('GET', url)
-
-        self.log.info("Sending GET about to url: %s to retrieve Qlik Session Cookie", url)
-
-        prepped = session.prepare_request(req)
-        try:
-            response = session.send(prepped, verify=False, allow_redirects=True)
-            if response.status_code  == 200:
-                self.__cookie_session = session.cookies.get_dict()['X-Qlik-Session']
+            session = self.get_conn_init()
+            endpoint = 'qrs/about'
+            
+            if self.base_url and not self.base_url.endswith('/') and endpoint and not endpoint.startswith('/'):
+                url = self.base_url + '/' + endpoint
             else:
+                url = (self.base_url or '') + (endpoint or '')
+
+            req = requests.Request('GET', url)
+
+            self.log.info("Sending GET about to url: %s to retrieve Qlik Session Cookie", url)
+
+            prepped = session.prepare_request(req)
+            try:
+                response = session.send(prepped, verify=False, allow_redirects=True)
+                if response.status_code  == 200:
+                    self.__cookie_session = session.cookies.get_dict()['X-Qlik-Session']
+                else:
+                    raise ValueError('Error when trying to get qlik session cookies.')
+
+            except requests.exceptions.ConnectionError as ex:
+                self.log.warning(
+                    '%s Tenacity will retry to execute the operation', ex)
+                raise ex
+            except:
                 raise ValueError('Error when trying to get qlik session cookies.')
 
-        except requests.exceptions.ConnectionError as ex:
-            self.log.warning(
-                '%s Tenacity will retry to execute the operation', ex)
-            raise ex
-        except:
-            raise ValueError('Error when trying to get qlik session cookies.')
 
     def get_conn_init(self) -> requests.Session:
             """

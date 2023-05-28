@@ -62,6 +62,7 @@ class QlikSenseReloadAppOperator(BaseOperator):
             flag=True
             while flag:
                 ans = hook.check_status_reload(appId=self.app_id)
+                self.log.info('Code Statut de la tâche: {}'.format(ans.status_code))
                 self.log.info('Statut de la tâche: {}'.format(ans.text))
                 if ans.status_code == 200:
                     body = ans.json()
