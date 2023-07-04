@@ -55,7 +55,7 @@ class QlikSenseReloadTaskOperator(BaseOperator):
                 self.log.info('Statut de la tâche: {}'.format(ans.text))
                 if ans.status_code == 200:
                     body = ans.json()
-                    reloadStatus = body[0]['operational']['lastExecutionResult']['status']
+                    reloadStatus = body['operational']['lastExecutionResult']['status']
                     if reloadStatus in [7]:
                         flag=False 
                     if reloadStatus in [5,6,4,8,11]:
