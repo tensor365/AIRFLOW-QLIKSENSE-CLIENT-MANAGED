@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-  Airflow: Qlik Sense Client Managed Provider (BETA)
+  Airflow: Qlik Sense Client Managed Provider
 </h1>
   <h3 align="center">
     Qlik Sense Client Managed Provider to reload application, tasks from Airflow.
@@ -26,6 +26,13 @@ The package has been tested with Python 3.7, Python 3.8.
 
 ## How to install it ?
 
+By using Pypi, 
+
+```bash
+pip install airflow-provider-qlik-sense-client-managed
+```
+
+In Local,
 
 To install it, download and unzip source and launch the following pip install command: 
 
