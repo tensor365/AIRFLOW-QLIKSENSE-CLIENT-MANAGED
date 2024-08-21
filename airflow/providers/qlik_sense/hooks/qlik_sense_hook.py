@@ -42,7 +42,6 @@ class QlikSenseHook(BaseHook):
 
         return ans
 
-
     def reload_app(self, appId: str= ""):
         """
         
@@ -59,7 +58,7 @@ class QlikSenseHook(BaseHook):
     def check_status_reload(self, appId: str= "", taskId: str= ""):
         """
         
-        Method used to check status of a trask
+        Method used to check status of a task
         
         """
         
@@ -72,6 +71,21 @@ class QlikSenseHook(BaseHook):
         ans = self.run(method, URI)
 
         return ans
+    
+    def check_status_external_task_reload(self, taskId: str= ""):
+        """
+        
+        Method used to check status of an external task
+        
+        """
+        
+        URI = '/qrs/externalprogramtask/{id}'.format(id=taskId)
+        
+        method = 'GET'
+        ans = self.run(method, URI)
+
+        return ans
+
 
     def download_app(self, appId: str= "", skipData: bool=False):
         """

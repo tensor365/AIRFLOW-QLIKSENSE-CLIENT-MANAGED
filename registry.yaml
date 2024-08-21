@@ -24,4 +24,5 @@ hooks:
 operators:
   - module: airflow.providers.qlik_sense.operators.reload_app_operator.QlikSenseReloadAppOperator
   - module: airflow.providers.qlik_sense.operators.reload_task_operator.QlikSenseReloadTaskOperator
+  - module: airflow.providers.qlik_sense.operators.reload_externaltask_operator.QlikSenseExternalTaskOperator
 
