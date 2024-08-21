@@ -59,7 +59,19 @@ class QlikSenseExternalTaskOperator(BaseOperator):
                     if reloadStatus in [7]:
                         flag=False 
                     if reloadStatus in [5,6,4,8,11]:
-                        flag=False 
+                        flag=False
+                        errorMessage=""
+                        if reloadStatus == 5:
+                             errorMessage="Code 5: The task is aborting"
+                        elif reloadStatus == 6:
+                            errorMessage="Code 6: The task has been aborted from QMC"
+                        elif reloadStatus == 4:
+                            errorMessage="Code 4: An aborted has been in a task QMC"
+                        elif reloadStatus == 8:
+                            errorMessage="Code 8: Task has failed"
+                        elif reloadStatus == 11:
+                            errorMessage="Code 11: Task has been reset"
+                        raise RuntimeError(f"Qlik Sense Run encountered an error: {errorMessage}")
                 else:
                     raise ValueError("API Error return")
 
