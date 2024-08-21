@@ -1,6 +1,6 @@
 <p align="center" style="vertical-align:center;">
   <a href="https://www.qlik.com/us/products/qlik-sense">
-    <img alt="Qlik Sense Client Managed" src="https://mace-solutions.fr/wp-content/uploads/2022/02/qlik-square.png" width="80", height="80" />
+    <img src="https://github.com/tensor365/AIRFLOW-QLIKSENSE-CLOUD/assets/13502563/780adaa3-9e0b-40e9-862f-7b0a3bb787a9" alt="qlik">
   </a>
 </p>
 
