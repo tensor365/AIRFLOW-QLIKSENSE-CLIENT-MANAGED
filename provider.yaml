@@ -1,0 +1,19 @@
+
+# Python package name.
+package-name: qlik_sense_client_managed_provider
+
+display-name: Qlik Sense Client Managed Provider
+
+description: Provider to schedule reloading of tasks, apps and automation into Qlik Sense Client Managed.
+
+hooks:
+  - module: airflow.providers.qlik_sense.hooks.qlik_sense_hook.QlikSenseHook
+  - module: airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert.QlikSenseHookCert
+  - module: airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt.QlikSenseHookJWT
+  - module: airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm.QlikSenseHookNTLM
+
+operators:
+  - module: airflow.providers.qlik_sense.operators.reload_app_operator.QlikSenseReloadAppOperator
+  - module: airflow.providers.qlik_sense.operators.reload_task_operator.QlikSenseReloadTaskOperator
+  - module: airflow.providers.qlik_sense.operators.reload_externaltask_operator.QlikSenseExternalTaskOperator
+
