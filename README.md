@@ -23,6 +23,12 @@ The package has been tested with Python 3.9.
 |-----------|-------------|
 | apache-airflow | >=2.10 |
 
+## News
+
+Be careful
+
+- Airflow QlikSense Client Managed 0.0.3 is compatible with Airflow Version 3.0
+- Airflow QlikSense Client Managed 0.0.2 is still compatible with Airflow Version below 3.0
 
 ## How to install it ?
 
@@ -116,9 +122,13 @@ Example:
 
 ```python
 
+
 from airflow.providers.qlik_sense.operators.reload_app_operator import QlikSenseReloadAppOperator
 from airflow import DAG
-from airflow.utils.dates import days_ago
+
+import pendulum
+
+from datetime import date
 from datetime import timedelta
 
 default_args = {
@@ -127,6 +137,7 @@ default_args = {
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
+    'schedule_interval':'@daily',
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
 }
@@ -138,14 +149,14 @@ with DAG(
     'QlikSenseReloadAppExample',
     default_args=default_args,
     description='A simple tutorial DAG reloading Qlik Sense App',
-    schedule_interval=timedelta(days=1),
-    start_date=days_ago(2),
+    start_date=pendulum.datetime(2021, 1, 1, 10, 40, 0, tz="Europe/Paris"),
     tags=['Qlik', 'Example'],
 ) as dag:
-    
+
     op = QlikSenseReloadAppOperator(app_id=idApp, conn_id=connId, task_id="QlikReloadTask")
-    
+
     op
+
 
 ```
 
