@@ -17,28 +17,27 @@ def get_provider_info():
         "operators":[
                         {
                             "integration-name": "Qlik Reload App Operator",
-                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator.QlikSenseReloadAppOperator"
+                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator"
                         },
                         {
                             "integration-name": "Qlik Reload Task Operator",
-                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator.QlikSenseReloadTaskOperator"
+                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator"
                         }, 
 
         ],
         'connection-types': [
             {
-                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert.QlikSenseHookCert',
+                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert',
                 'connection-type': 'qlik_sense_client_managed_cert',
             },
             {
-                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt.QlikSenseHookJWT',
+                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt',
                 'connection-type': 'qlik_sense_client_managed_jwt',
             },
             {
-                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm.QlikSenseHookNTLM',
+                'hook-class-name': 'airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm',
                 'connection-type': 'qlik_sense_client_managed_ntlm',
             },
         ],
-        #"extra-links": ["qlik_sense_cloud.operators.sample_operator.ExtraLink"],
-        "versions": ["0.0.1"] # Required
+        "versions": ["0.0.2"] # Required
     }
