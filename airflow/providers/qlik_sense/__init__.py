@@ -19,11 +19,11 @@ def get_provider_info():
         "operators":[
                         {
                             "integration-name": "Qlik Reload App Operator",
-                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator"
+                            "python-modules":["airflow.providers.qlik_sense.operators.reload_app_operator"]
                         },
                         {
                             "integration-name": "Qlik Reload Task Operator",
-                            "python-modules":"airflow.providers.qlik_sense.operators.reload_app_operator"
+                            "python-modules":["airflow.providers.qlik_sense.operators.reload_task_operator"]
                         }, 
 
         ],
