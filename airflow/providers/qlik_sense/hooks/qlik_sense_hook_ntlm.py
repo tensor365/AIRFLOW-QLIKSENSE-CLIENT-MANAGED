@@ -2,11 +2,11 @@ from typing import Any, Callable, Dict, Optional, Union
 from wsgiref.validate import validator
 
 import requests
-from requests.auth import HTTPBasicAuth
 
 from airflow.exceptions import AirflowException
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook import QlikSenseHook
-from requests_ntlm import HttpNtlmAuth
+
+from requests_ntlm2 import HttpNtlmAuth
 
 class QlikSenseHookNTLM(QlikSenseHook):
     """
