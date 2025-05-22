@@ -17,11 +17,11 @@ This repository provides basic qlik sense client managed hooks and operators to 
 
 ## Requirements
 
-The package has been tested with Python 3.7, Python 3.8.
+The package has been tested with Python 3.9.
 
-|  Package  |  Version  |
-|-----------|-----------|
-| apache-airflow | >2.0 |
+|  Package  |  Version    |
+|-----------|-------------|
+| apache-airflow | >=2.10 |
 
 
 ## How to install it ?
