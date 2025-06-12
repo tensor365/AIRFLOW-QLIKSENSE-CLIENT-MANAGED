@@ -41,5 +41,5 @@ def get_provider_info():
                 'connection-type': 'qlik_sense_client_managed_ntlm',
             },
         ],
-        "versions": ["0.0.2"]
+        "versions": ["0.0.3"]
     }

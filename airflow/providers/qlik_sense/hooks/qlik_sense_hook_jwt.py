@@ -6,7 +6,6 @@ from requests.auth import HTTPBasicAuth
 
 from airflow.exceptions import AirflowException
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook import QlikSenseHook
-from airflow.hooks.base import BaseHook
 
 class QlikSenseHookJWT(QlikSenseHook):
     """

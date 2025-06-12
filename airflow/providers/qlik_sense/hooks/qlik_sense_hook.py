@@ -6,10 +6,8 @@ import string
 
 import requests
 
-
 from airflow.exceptions import AirflowException
 from airflow.hooks.base import BaseHook
-
 
 class QlikSenseHook(BaseHook):
     """

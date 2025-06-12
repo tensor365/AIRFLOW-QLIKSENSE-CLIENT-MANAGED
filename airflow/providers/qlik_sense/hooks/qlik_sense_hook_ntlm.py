@@ -6,7 +6,7 @@ import requests
 from airflow.exceptions import AirflowException
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook import QlikSenseHook
 
-from requests_ntlm2 import HttpNtlmAuth
+from requests_ntlm import HttpNtlmAuth
 
 class QlikSenseHookNTLM(QlikSenseHook):
     """

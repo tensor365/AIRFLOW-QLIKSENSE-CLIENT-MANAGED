@@ -33,7 +33,7 @@ Be careful
 ## How to install it ?
 
 By using Pypi, 
-
+  
 ```bash
 pip install airflow-provider-qlik-sense-client-managed
 ```
