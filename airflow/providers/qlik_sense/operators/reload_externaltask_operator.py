@@ -2,6 +2,7 @@ from typing import Any, Callable, Dict, Optional
 
 from airflow.models import BaseOperator
 from airflow.hooks.base import BaseHook
+import time
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm import QlikSenseHookNTLM
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt import QlikSenseHookJWT
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert import QlikSenseHookCert
@@ -70,9 +71,10 @@ class QlikSenseExternalTaskOperator(BaseOperator):
                         elif reloadStatus == 11:
                             errorMessage="Code 11: Task has been reset"
                         raise RuntimeError(f"Qlik Sense Run encountered an error: {errorMessage}")
+                    
                 else:
                     raise ValueError("API Error return")
-
+                time.sleep(30)
         self.log.info('Status Code Return {}'.format(response.status_code))
         self.log.info('Answer Return {}'.format(response.text))
         return response.text

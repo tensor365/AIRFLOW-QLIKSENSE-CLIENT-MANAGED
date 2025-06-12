@@ -5,6 +5,7 @@ from airflow.hooks.base import BaseHook
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_ntlm import QlikSenseHookNTLM
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_jwt import QlikSenseHookJWT
 from airflow.providers.qlik_sense.hooks.qlik_sense_hook_cert import QlikSenseHookCert
+import time
 
 class QlikSenseReloadTaskOperator(BaseOperator):
     """
@@ -57,10 +58,11 @@ class QlikSenseReloadTaskOperator(BaseOperator):
                     if reloadStatus in [7]:
                         flag=False 
                     if reloadStatus in [5,6,4,8,11]:
-                        flag=False 
+                        flag=False
+                
                 else:
                     raise ValueError("API Error return")
-
+                time.sleep(30)
         self.log.info('Status Code Return {}'.format(response.status_code))
         self.log.info('Answer Return {}'.format(response.text))
         return response.text
